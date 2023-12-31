@@ -1,0 +1,10 @@
+.loginbtn:hover {
+  background-color: green !important ;
+  color: white !important;
+  transition: 1s;
+}
+.signupbtn:hover {
+  background-color: red !important ;
+  color: white !important;
+  transition: 1s;
+}
