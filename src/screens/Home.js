@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "../components/Carousel";
 import { useCartState } from "../ContextReducer";
-
 import Card from "../components/Card";
 import { Link, useNavigate } from "react-router-dom";
+const url = process.env.REACT_APP_URL
 const Home = () => {
     let state = useCartState()
+    console.log("env url", url);
     let navigate = useNavigate();
     const [items, setItems] = useState([]);
     const [category, setCategory] = useState([]);
     const [search, setsearch] = useState("");
     // localStorage.setItem("state", state);
     const fetching = async () => {
-        let response = await fetch("http://localhost:5000/api/fooditem", {
+        let response = await fetch(`${url}/api/fooditem`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
         });
@@ -51,9 +52,9 @@ const Home = () => {
                     <div
                         className="collapse navbar-collapse"
                         id="navbarNav"
-                        style={{ justifyContent: "space-between" }}
+                        style={{width:'auto', justifyContent: "space-between", }}
                     >
-                        <ul className="navbar-nav ">
+                        <ul className="navbar-nav bg-primary">
                             <li className="nav-item ">
                                 <a
                                     className="nav-link active text-white"
@@ -70,7 +71,7 @@ const Home = () => {
                             </li> : ""}
                         </ul>
 
-                        <div className="btns d-flex align-items-center   ">
+                        <div className="btns d-flex align-items-center bg-primary" style={{justifyContent:'center'}}>
                             {/* search bar */}
                             <div className="me-3">
                                 <input

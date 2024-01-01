@@ -16,4 +16,4 @@ app.use("/api", require("./signIn"));
 app.use("/api", require("./Orders"));
 app.use("/api", require("./Myorders"));
 
-app.listen(5000);
+app.listen(process.env.PORT||5000);

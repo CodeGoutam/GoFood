@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useCartState, useCartDispatch } from "../ContextReducer";
 import { Link } from "react-router-dom";
+const url = process.env.REACT_APP_URL
 const Cart = () => {
     let state = useCartState();
     let dispatch = useCartDispatch();
     let price = 0;
     let email = localStorage.getItem("email");
     const handleCheckout = async () => {
-        const fetchingOrdersApi = await fetch("http://localhost:5000/api/orders", {
+        const fetchingOrdersApi = await fetch(`${url}/api/orders`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: email, data: state }),
         });
         // let res = fetchingOrdersApi.json();
-        if (fetchingOrdersApi.status == 200) {
+        if (fetchingOrdersApi.status === 200) {
             await dispatch({ type: "CHECKOUT" });
         }
     };
@@ -24,7 +25,7 @@ const Cart = () => {
                 style={{
                     alignItems: "center",
                     display: "flex",
-                    height:'63px'
+                    height: '63px'
                 }}
             >
                 <Link to={"/"} className="me-5">
@@ -41,7 +42,7 @@ const Cart = () => {
                 <div className="container h-100 py-5">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-10">
-                            {state.length == 0 ? (
+                            {state.length === 0 ? (
                                 <h1>No Items</h1>
                             ) : (
                                 state.map((items, index) => {
@@ -96,7 +97,7 @@ const Cart = () => {
                                 })
                             )}
 
-                            {state.length == 0 ? (
+                            {state.length === 0 ? (
                                 ""
                             ) : (
                                 <div className="card">

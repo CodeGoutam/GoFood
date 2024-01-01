@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-
+const url = process.env.REACT_APP_URL
 const Myorders = () => {
     let res;
     const [data, setData] = useState([])
     const fetchingFunction = async () => {
-        const response = await fetch("http://localhost:5000/api/myorders", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: localStorage.getItem('email') }) })
+        const response = await fetch(`${url}/api/myorders`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: localStorage.getItem('email') }) })
         res = await response.json()
         // console.log(res)
         setData(res)
